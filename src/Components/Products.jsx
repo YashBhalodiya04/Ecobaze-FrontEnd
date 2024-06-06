@@ -86,7 +86,7 @@ const Products = () => {
       </div>
 
       <div className="w-full grid grid-cols-5 gap-3 sm:grid-cols-2 md:grid-cols-3 bg-[#EDF2EE] p-2 mt-4">
-        {products.map((item) => {
+        {products?.slice(0,10).map((item) => {
           return (
             <div className="w-full h-[260px] sm:h-[200px]" key={item._id}>
               <ProductCard

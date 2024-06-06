@@ -11,6 +11,7 @@ import location from "./Location.svg";
 import phonecall from "./PhoneCall.svg";
 import email from "./Email.svg";
 import rightArrow from "./RightArrow.svg";
+import pagenotfound from "./Page-Not_found.svg"
 export {
   posterimage,
   posterimage2,
@@ -25,4 +26,5 @@ export {
   phonecall,
   email,
   rightArrow,
+  pagenotfound
 };

@@ -15,7 +15,7 @@ const Shop = () => {
   const { products } = useSelector((state) => state.products);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPageLimit, setPerPageLimit] = useState(5);
+  const [perPageLimit, setPerPageLimit] = useState(8);
 
   const [showCategory, setShowCategory] = useState(false);
   const [showPrice, setShowPrice] = useState(false);
@@ -171,8 +171,7 @@ const Shop = () => {
                 return (
                   <div
                     key={index}
-                    className="flex items-center justify-center gap-1"
-                  >
+                    className="flex items-center justify-center gap-1">
                     <input
                       type="checkbox"
                       name="Category"
@@ -182,8 +181,7 @@ const Shop = () => {
                     />
                     <label
                       htmlFor={category.name}
-                      className="cursor-pointer text-base uppercase"
-                    >
+                      className="cursor-pointer text-base uppercase">
                       {category.name}
                     </label>
                   </div>
@@ -198,8 +196,7 @@ const Shop = () => {
                 return (
                   <div
                     key={amount.amount}
-                    className="flex items-center justify-center gap-1"
-                  >
+                    className="flex items-center justify-center gap-1">
                     <input
                       type="radio"
                       name="Price"
@@ -209,8 +206,7 @@ const Shop = () => {
                     />
                     <label
                       htmlFor={amount.amount}
-                      className="cursor-pointer text-base uppercase"
-                    >
+                      className="cursor-pointer text-base uppercase">
                       {amount.amount}
                     </label>
                   </div>
@@ -226,8 +222,7 @@ const Shop = () => {
             {/* Reset Button */}
             <button
               className="bg-green-600 px-3 py-1 rounded-lg sm:hidden md:hidden"
-              onClick={resetFilters}
-            >
+              onClick={resetFilters}>
               Reset Filters
             </button>
 
@@ -255,14 +250,12 @@ const Shop = () => {
               <div
                 className={`${
                   showCategory ? "block" : "hidden"
-                } w-[120px] md:w-[160px] md:mt-4 flex flex-col justify-around items-start gap-2 mt-3 py-2 rounded-lg -ml-2 px-2 bg-green-200 `}
-              >
+                } w-[120px] md:w-[160px] md:mt-4 flex flex-col justify-around items-start gap-2 mt-3 py-2 rounded-lg -ml-2 px-2 bg-green-200 `}>
                 {categories.map((category, index) => {
                   return (
                     <div
                       key={index}
-                      className="flex items-center justify-center gap-1 "
-                    >
+                      className="flex items-center justify-center gap-1 ">
                       <input
                         type="checkbox"
                         checked={
@@ -277,8 +270,7 @@ const Shop = () => {
                       />
                       <label
                         htmlFor={category.name}
-                        className="cursor-pointer text-[10px] md:text-sm uppercase"
-                      >
+                        className="cursor-pointer text-[10px] md:text-sm uppercase">
                         {category.name}
                       </label>
                     </div>
@@ -311,14 +303,12 @@ const Shop = () => {
               <div
                 className={`${
                   showPrice ? "block" : "hidden"
-                } w-[100px] md:w-[130px] flex flex-col justify-around items-start gap-2 md:mt-2  mt-3 py-2 rounded-lg px-3 -ml-2 z-20 bg-green-200`}
-              >
+                } w-[100px] md:w-[130px] flex flex-col justify-around items-start gap-2 md:mt-2  mt-3 py-2 rounded-lg px-3 -ml-2 z-20 bg-green-200`}>
                 {priceOptions.map((amount) => {
                   return (
                     <div
                       key={amount.amount}
-                      className="flex items-center justify-center gap-1"
-                    >
+                      className="flex items-center justify-center gap-1">
                       <input
                         type="radio"
                         name="Price"
@@ -328,8 +318,7 @@ const Shop = () => {
                       />
                       <label
                         htmlFor={amount.amount}
-                        className="cursor-pointer text-[10px] md:text-sm uppercase"
-                      >
+                        className="cursor-pointer text-[10px] md:text-sm uppercase">
                         {amount.amount}
                       </label>
                     </div>
@@ -343,8 +332,7 @@ const Shop = () => {
               <select
                 name="sort"
                 onChange={handleSortChange}
-                className="font-[Poppins] text-sm sm:text-xs border outline-none p-1 -mt-6 rounded-lg cursor-pointer w-full sm:h-full md:h-full  sm:p-0 sm:border-none md:border-none"
-              >
+                className="font-[Poppins] text-sm sm:text-xs border outline-none p-1 -mt-6 rounded-lg cursor-pointer w-full sm:h-full md:h-full  sm:p-0 sm:border-none md:border-none">
                 <option>Sort</option>
                 {sortOptions?.map((option, index) => {
                   return (
@@ -364,8 +352,7 @@ const Shop = () => {
                 <div
                   // onClick={() => navigate(`/showproductdetail/${item._id}`)}
                   key={item._id}
-                  className="w-full h-[300px] sm:h-[200px]"
-                >
+                  className="w-full h-[300px] sm:h-[200px]">
                   <ProductCard
                     key={item._id}
                     src={item.image}
@@ -385,8 +372,7 @@ const Shop = () => {
               className={`join-item btn border-none rounded-l-md ${
                 currentPage === 1 && "bg-gray"
               }`}
-              disabled={currentPage === 1}
-            >
+              disabled={currentPage === 1}>
               «
             </button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map(
@@ -397,8 +383,7 @@ const Shop = () => {
                   className={`join-item btn border-none w-10 h-10 font-[Poppins] rounded-lg font-semibold flex items-center justify-center ${
                     currentPage === pageNum &&
                     "bg-green-600 text-white hover:bg-green-800 hover:text-white"
-                  }`}
-                >
+                  }`}>
                   {pageNum}
                 </button>
               )
@@ -408,8 +393,7 @@ const Shop = () => {
               className={`join-item btn border-none rounded-r-md ${
                 currentPage === totalPages && "bg-gray"
               }`}
-              disabled={currentPage === totalPages}
-            >
+              disabled={currentPage === totalPages}>
               »
             </button>
           </div>

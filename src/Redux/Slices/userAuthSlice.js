@@ -93,6 +93,54 @@ export const updateBillingAddress = createAsyncThunk(
   }
 );
 
+// Update Password
+export const updatePassword = createAsyncThunk(
+  "updatePassword",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    console.log(payload);
+    try {
+      const responce = await axios.put(
+        "http://localhost:5000/api/user/updatepassword",
+        payload,
+        {
+          headers: {
+            // "Content-Type": "multipart/form-data",
+            authorization: JSON.parse(localStorage.getItem("userInfo")).token,
+          },
+        }
+      );
+      console.log(responce.data);
+      return responce.data;
+    } catch (error) {
+      return rejectWithValue(error.responce.data);
+    }
+  }
+); 
+
+// Update Profile
+
+export const updateProfile = createAsyncThunk(
+  "updateProfile",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    // console.log(payload);
+    try {
+      const responce = await axios.put(
+        "http://localhost:5000/api/user/updateprofile",
+        payload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            authorization: JSON.parse(localStorage.getItem("userInfo")).token,
+          },
+        }
+      );
+      console.log(responce.data);
+      return responce.data;
+    } catch (error) {
+      return rejectWithValue(error.responce.data);
+    }
+  })
+
 const userAuthSlice = createSlice({
   name: "users",
   initialState: {
@@ -217,6 +265,64 @@ const userAuthSlice = createSlice({
       state.isDeleted = false;
       state.isLodding = false;
     });
+
+    // Update Password
+    builder.addCase(updatePassword.pending, (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+      state.isError = null;
+      state.isUpdated = false;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isLodding = true;
+    });
+    builder.addCase(updatePassword.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
+      state.isError = null;
+      state.isUpdated = true;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isLodding = false;
+    });
+    builder.addCase(updatePassword.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.isError = action.payload;
+      state.user = null;
+      state.isUpdated = false;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isLodding = false;
+    })
+
+    // Update Profile
+    builder.addCase(updateProfile.pending, (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+      state.isError = null;
+      state.isUpdated = false;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isLodding = true;
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
+      state.isError = null;
+      state.isUpdated = true;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isLodding = false;
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.isError = action.payload;
+      state.user = null;
+      state.isUpdated = false;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isLodding = false;
+    })
   },
 });
 

@@ -10,7 +10,7 @@ const Poster = () => {
   var settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 5,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,

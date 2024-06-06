@@ -22,6 +22,7 @@ const buttons = [
 
 const ShowProductDetail = () => {
   const [isActive, setIsActive] = useState(0);
+  const [quantity, setQuantity] = useState(0);
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const ShowProductDetail = () => {
   const { product } = useSelector((state) => state?.products);
 
   const handleaddproduct = (productId, price) => {
-    dispatch(addToCart({ productId, price }));
+    dispatch(addToCart({ productId, price ,quantity}));
   };
 
   const { isAdded, isError, message } = useSelector(
@@ -52,7 +53,7 @@ const ShowProductDetail = () => {
     <>
       <div className="w-full h-full flex flex-col items-start justify-between  mt-7 font-Poppins ">
         <div className="w-full h-full flex flex-col items-start justify-between px-20 sm:px-4">
-          <div className=" w-full sm:h-[500px] px-48  grid grid-cols-2  gap-12 bg-white items-start justify-between sm:place-content-start sm:place-items-start  sm:grid-cols-1 sm:gap-4">
+          <div className=" w-full sm:h-[500px] px-48  grid grid-cols-2  gap-12 bg-white items-start justify-between sm:place-content-start sm:place-items-start sm:px-0 md:px-0 md:gap-2  sm:grid-cols-1 sm:gap-4">
             <div className="bg-gray-300 flex items-center justify-center rounded-lg overflow-hidden  px-1  py-10 sm:p-2 sm:h-full sm:w-full">
               <img
                 src={product.image}
@@ -75,29 +76,41 @@ const ShowProductDetail = () => {
                 <GoStar className="sm:text-xs" />
                 <p className="ml-3">4 Reviews</p>
               </div>
-              <h1 className="flex items-center justify-start text-base gap-2 text-green-900 font-medium">
-                <span className="opacity-80 text line-through text-black font-light">
+              <h1 className="flex items-center justify-start text-base gap-2 text-green-900  font-semibold">
+                {/* <span className="opacity-80 text line-through text-black font-light">
                   $48.00
-                </span>
-                {product.price}{" "}
-                <span className="text-[10px] bg-red-200 px-2 rounded-full text-red-600 font-semibold">
+                </span> */}
+                ${product?.price}
+                {/* <span className="text-[10px] bg-red-200 px-2 rounded-full text-red-600 font-semibold">
                   64% Off
-                </span>
+                </span> */}
               </h1>
 
               <p className="text-sm  border-y-2 border-black py-5 border-opacity-25 text-justify w-full">
-                {product.description}
+                {product?.description?.slice(0, 100)} ...
               </p>
 
-              <div className=" w-full flex items-center justify-between gap-7">
-                <div className=" w-2/6 flex items-center justify-between border rounded-3xl border-black px-2 py-1">
-                  <button className="bg-gray-400 px-2 rounded-full">-</button>
-                  <p>0</p>
-                  <button className="bg-gray-400 px-2 rounded-full">+</button>
+              <div className=" w-full flex items-center justify-between gap-7 md:gap-3">
+                <div className=" w-2/6 md:w-[150px] flex items-center justify-between border rounded-3xl border-black px-2 py-1">
+                  <button
+                    className="bg-gray-400 px-2 rounded-full"
+                    onClick={() => setQuantity(quantity - 1)}
+                    disabled={quantity < 2}
+                  >
+                    -
+                  </button>
+                  <p>{quantity}</p>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="bg-gray-400 px-2 rounded-full"
+                    disabled={quantity > 10}
+                  >
+                    +
+                  </button>
                 </div>
 
                 <button
-                  onClick={() => handleaddproduct(product?._id, product?.price)}
+                  onClick={() => handleaddproduct(product?._id, product?.price,quantity)}
                   className="w-4/6 bg-green-600 rounded-full py-1 text-white"
                 >
                   Add to cart
@@ -134,9 +147,9 @@ const ShowProductDetail = () => {
                 );
               })}
             </div>
-            <div className="flex items-start justify-start w-full ">
+            <div className="flex items-start justify-start w-1/2 text-justify ">
               <div className={`${isActive === 0 ? "block" : "hidden"} `}>
-                {product.description}
+                {product?.description}
               </div>
               <div className={`${isActive === 1 ? "block" : "hidden"}`}>
                 Lorem ipsum dolor sit amet.

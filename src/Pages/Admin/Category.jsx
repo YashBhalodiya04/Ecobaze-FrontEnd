@@ -47,6 +47,7 @@ const Category = () => {
     setCategory({ ...categoryData, name: "" });
   };
 
+  // Delete Category
   const handledeletebutton = (id) => {
     if (window.alert("Are you sure to delete this category ?")) {
       dispatch(deleteCategory(id));

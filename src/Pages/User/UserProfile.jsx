@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getUser,
   updateBillingAddress,
+  updatePassword,
+  updateProfile,
 } from "../../Redux/Slices/userAuthSlice";
 
 const Contries = [
@@ -38,6 +40,7 @@ const UserProfile = () => {
     lastName: "",
     email: "",
     phone: "",
+    userimage: "",
   });
   const handleonchangeprofile = (e) => {
     setUserDetails({
@@ -73,6 +76,7 @@ const UserProfile = () => {
         lastName: user?.user?.lastName,
         email: user?.user?.email,
         phone: user?.user?.phone ? user?.user?.phone : 11111111111,
+        userimage: user?.user?.userimage,
       });
       setUserAddress({
         firstname: user?.user?.billingAddress?.firstname,
@@ -99,7 +103,8 @@ const UserProfile = () => {
         firstName: user?.user?.firstName,
         lastName: user?.user?.lastName,
         email: user?.user?.email,
-        phone: user?.user?.phone ? ser?.user?.phone : 11111111111,
+        phone: user?.user?.phone ? user?.user?.phone : 11111111111,
+        userimage: user?.user?.userimage,
       });
       setUserAddress({
         firstname: user?.user?.billingAddress?.firstname,
@@ -124,6 +129,53 @@ const UserProfile = () => {
     }
   };
 
+  // Change Password
+  const [password, setPassword] = useState({
+    currentpassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const handleonchangepassword = (e) => {
+    setPassword({
+      ...password,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handlesubmitpassworddata = () => {
+    if (password?.confirmPassword === password?.newPassword) {
+      // console.log(password);
+      dispatch(updatePassword(password));
+      setPassword({
+        currentpassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+    } else {
+      alert("Password Not Match");
+    }
+  };
+
+  //  Image Review
+  const [isFile, setFile] = useState(false);
+  const [poster, setPoster] = useState("");
+
+  // Handle Image
+  const handleChangeImage = (e) => {
+    const file = e.target.files[0];
+    setPoster(URL.createObjectURL(file));
+    setFile(true);
+    setUserDetails({ ...userDetails, userimage: file });
+  };
+
+  const handleUpdateProfile = () => {
+    if (confirm("Are You Sure?")) {
+      setFile(false)
+      dispatch(updateProfile(userDetails));
+      setPoster("")
+    }
+  };
+
   return (
     <div className=" w-full flex flex-col justify-between items-start gap-3 font-Poppins">
       {/* Account Setting */}
@@ -133,8 +185,33 @@ const UserProfile = () => {
             Account Settings
           </h1>
         </div>
-        <div className="px-7 w-full mt-4 grid grid-cols-2 place-content-center ">
+        <div className="px-7 w-full mt-4 grid grid-cols-2 place-content-center sm:grid-cols-1 md:grid-cols-1">
           <div className="w-full flex flex-col justify-between items-start gap-3">
+            <div className="w-full flex flex-col gap-5 items-center justify-center lg:hidden  ">
+              <img
+                src={userDetails?.userimage ? userDetails?.userimage : userlogo}
+                alt="user Profile"
+                className={`${
+                  isFile ? "hidden" : "block"
+                } w-[300px] h-[300px] rounded-full`}
+              />
+              <img
+                src={poster}
+                alt="user Profile"
+                className={`${
+                  isFile ? "block" : "hidden"
+                } w-[300px] h-[300px] rounded-full`}
+              />
+              <button className="border relative border-green-500 px-7 py-3 rounded-lg text-green-500 font-semibold">
+                <input
+                  type="file"
+                  name="userimage"
+                  onChange={handleChangeImage}
+                  className=" absolute  opacity-0 w-full cursor-pointer"
+                />
+                Change Image
+              </button>
+            </div>
             <div className="w-full flex flex-col items-start justify-center gap-1">
               <label htmlFor="firstname">First Name</label>
               <input
@@ -184,14 +261,36 @@ const UserProfile = () => {
             </div>
 
             <div className="w-full flexitems-center justify-start">
-              <button className="border border-white hover:border-green-500 text-white hover:text-green-500 bg-green-500 hover:bg-white px-5 py-3 rounded-lg ">
+              <button
+                onClick={handleUpdateProfile}
+                className="border border-white hover:border-green-500 text-white hover:text-green-500 bg-green-500 hover:bg-white px-5 py-3 rounded-lg "
+              >
                 Save Changes
               </button>
             </div>
           </div>
-          <div className="w-full flex flex-col gap-5 items-center justify-center ">
-            <img src={userlogo} alt="user Profile" className="w-1/2" />
-            <button className="border  border-green-500 px-7 py-3 rounded-lg text-green-500 font-semibold">
+          <div className="w-full flex flex-col gap-5 items-center justify-center sm:hidden md:hidden">
+            <img
+              src={userDetails?.userimage ? userDetails?.userimage : userlogo}
+              alt="user Profile"
+              className={`${
+                isFile ? "hidden" : "block"
+              } w-[300px] h-[300px] rounded-full`}
+            />
+            <img
+              src={poster}
+              alt="user Profile"
+              className={`${
+                isFile ? "block" : "hidden"
+              } w-[300px] h-[300px] rounded-full`}
+            />
+            <button className="border relative border-green-500 px-4 py-3 rounded-lg text-green-500 font-semibold cursor-pointer">
+              <input
+                type="file"
+                name="userimage"
+                onChange={handleChangeImage}
+                className=" absolute  opacity-0 w-full cursor-pointer"
+              />
               Change Image
             </button>
           </div>
@@ -204,7 +303,7 @@ const UserProfile = () => {
         </div>
         <div className="px-7 w-full mt-4 flex flex-col items-start justify-between gap-3 py-3">
           {/* Name And City */}
-          <div className="w-full grid grid-cols-3 place-content-center place-items-center gap-7">
+          <div className="w-full grid grid-cols-3 place-content-center place-items-center gap-7 sm:grid-cols-1 sm:gap-2 md:grid-cols-1 md:gap-2">
             <div className="w-full flex flex-col items-start justify-center gap-1">
               <label htmlFor="firstname">First Name</label>
               <input
@@ -252,7 +351,7 @@ const UserProfile = () => {
             />
           </div>
           {/* Country State And Zipcode */}
-          <div className="w-full grid grid-cols-3 place-content-center place-items-start gap-7">
+          <div className="w-full grid grid-cols-3 place-content-center place-items-start gap-7 sm:grid-cols-1 sm:gap-2">
             <div className="w-full flex flex-col items-start justify-between gap-1">
               <label htmlFor="country">Country / Region</label>
               <select
@@ -321,7 +420,7 @@ const UserProfile = () => {
             </div>
           </div>
           {/* Save Change */}
-          <div className="w-full flexitems-center justify-start">
+          <div className="w-full flex items-center justify-start">
             <button
               onClick={handlesubmitaddressdata}
               className="border border-white hover:border-green-500 text-white hover:text-green-500 bg-green-500 hover:bg-white px-5 py-3 rounded-lg "
@@ -342,18 +441,22 @@ const UserProfile = () => {
           <input
             type="text"
             name="currentpassword"
+            value={password.currentpassword}
+            onChange={handleonchangepassword}
             placeholder="Entrt Current Password"
             className="w-full border rounded-lg px-3 py-2 focus:outline-green-500 text-sm"
           />
         </div>
-        {/* Neww Password */}
-        <div className="w-full flex items-center justify-between gap-9 px-7">
+        {/* New Password */}
+        <div className="w-full flex items-center justify-between gap-9 px-7 sm:flex-col sm:gap-3">
           <div className="w-full flex flex-col items-start justify-center gap-1">
             <label htmlFor="newpassword">New Password</label>
             <input
               type="text"
-              name="newpassword"
+              name="newPassword"
+              value={password.newPassword}
               placeholder="Enter New Password"
+              onChange={handleonchangepassword}
               className="w-full border rounded-lg px-3 py-2 focus:outline-green-500 text-sm"
             />
           </div>
@@ -361,7 +464,9 @@ const UserProfile = () => {
             <label htmlFor="confirmpassword">Confirm Password</label>
             <input
               type="text"
-              name="confirmpassword"
+              name="confirmPassword"
+              value={password.confirmPassword}
+              onChange={handleonchangepassword}
               placeholder="Enter Confirm Password"
               className="w-full border rounded-lg px-3 py-2 focus:outline-green-500 text-sm"
             />
@@ -369,7 +474,10 @@ const UserProfile = () => {
         </div>
         {/* Save Change */}
         <div className="w-full flexitems-center justify-start px-7">
-          <button className="border border-white hover:border-green-500 text-white hover:text-green-500 bg-green-500 hover:bg-white px-5 py-3 rounded-lg ">
+          <button
+            onClick={handlesubmitpassworddata}
+            className="border border-white hover:border-green-500 text-white hover:text-green-500 bg-green-500 hover:bg-white px-5 py-3 rounded-lg "
+          >
             Save Changes
           </button>
         </div>

@@ -5,6 +5,7 @@ import axios from "axios";
 export const fetchProducts = createAsyncThunk(
   "fetchProducts",
   async ({ data, imageFile }, { rejectWithValue, getState, dispatch }) => {
+    // console.log(imageFile);
     try {
       const formData = new FormData();
       formData.append("name", data.name);
@@ -16,14 +17,7 @@ export const fetchProducts = createAsyncThunk(
       formData.append("image", imageFile);
       const responce = await axios.post(
         "http://localhost:5000/api/product/createproduct",
-        {
-          name: formData.get("name"),
-          description: formData.get("description"),
-          price: parseInt(formData.get("price")),
-          stock: parseInt(formData.get("stock")),
-          category: formData.get("category"),
-          image: formData.get("image"),
-        },
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",

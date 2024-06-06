@@ -9,13 +9,7 @@ const Navlinks = [
     path: "profile",
     icon: dashboard,
     activeIcon: activedashboard,
-  },
-  {
-    name: "Orders",
-    path: "orders",
-    icon: orders,
-    activeIcon: activeOrder,
-  },
+  }
 ];
 
 const UserDashboard = () => {
@@ -31,7 +25,7 @@ const UserDashboard = () => {
   });
   return (
     <div className="w-full mt-7">
-      <div className="grid grid-cols-userDashboard place-content-center gap-3 px-20 mb-7">
+      <div className="grid grid-cols-userDashboard  place-content-center gap-3 px-20 mb-7 sm:px-3 sm:grid-cols-1 md:grid-cols-1">
         <div className="w-full h-[200px] flex flex-col items-start justify-around border rounded-lg">
           <h1 className="text-xl font-semibold text-center w-full">
             Navigation

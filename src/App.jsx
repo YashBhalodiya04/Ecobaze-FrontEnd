@@ -14,6 +14,7 @@ import {
   Contect,
   About,
   ShowProductDetail,
+  NotFonundPage,
 } from "./Pages";
 import { UserDashboard, UserProfile, UserOrders } from "./Pages/User";
 import { Navbar } from "./Components";
@@ -25,6 +26,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="*" element={<NotFonundPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/api/v1/user/signin" element={<Login />} />
         <Route path="/api/v1/user/signup" element={<SignUp />} />

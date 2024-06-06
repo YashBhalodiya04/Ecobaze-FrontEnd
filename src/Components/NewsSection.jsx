@@ -8,9 +8,9 @@ const NewsSection = () => {
 
   const [allNews, setAllNews] = useState([]);
 
-    // useEffect(() => {
-    //   dispatch(fetchNews());
-    // }, []);
+    useEffect(() => {
+      dispatch(fetchNews());
+    }, []);
 
   const { news, loading, error } = useSelector((state) => state?.newsSlice);
 

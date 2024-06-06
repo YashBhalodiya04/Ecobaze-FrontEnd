@@ -98,6 +98,8 @@ const Products = () => {
     setImageFile(file);
     previewFile(file);
   };
+
+  
   const { isAdded, isUpdated, isDeleted } = useSelector(
     (state) => state.products
   );
@@ -175,6 +177,21 @@ const Products = () => {
     setImageFile({});
     setProductId("");
   };
+  const handlecanclebtn = () => {
+    setIsUpdateCheck(!isUpdateCheck);
+    setIsChecked(false);
+    setFile(false);
+    setImage("");
+    setImageFile({});
+    setProductId("");
+    setData({
+      name: "",
+      description: "",
+      category: "",
+      price: "",
+      stock: "",
+    });
+  };
 
   return (
     <div className="flex flex-col mt-4 sm:px-8 ">
@@ -205,7 +222,7 @@ const Products = () => {
               name="file"
               onChange={handleChangeImage}
               required
-              accept="image/png, image/jpeg,image/jpg,image/jfif,"
+              accept="image/png, image/jpeg, image/jpg, image/jfif"
             />
             <div
               className={`${
@@ -285,7 +302,7 @@ const Products = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-3 ">
           {!isUpdateCheck ? (
             <button
               type="submit"
@@ -306,7 +323,7 @@ const Products = () => {
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 rounded-md py-2 px-5 text-white font-Poppins font-medium"
-            onClick={() => setIsChecked(false)}
+            onClick={handlecanclebtn}
           >
             Cancle
           </button>
@@ -317,7 +334,7 @@ const Products = () => {
       <div className="w-full mt-8 py-3 px-4 sm:overflow-x-scroll md:overflow-x-scroll bg-gray-100">
         <table className="w-full">
           <thead>
-            <tr className="grid grid-cols-9 items-center gap-4 sm:gap-20 md:gap-20 w-full border-b">
+            <tr className="grid grid-cols-9 items-center gap-1 sm:gap-20 md:gap-20 w-full border-b">
               <th className=" border-gray-500 text-left sm:text-sm">No.</th>
 
               <th className=" border-gray-500 text-left sm:text-sm ">
@@ -338,13 +355,13 @@ const Products = () => {
                 description
               </th>
 
-              <th className=" border-gray-500 text-left sm:text-sm sm:ml-7 md:ml-7">
+              <th className=" border-gray-500 text-left sm:text-sm sm:ml-7 md:ml-7 lg:ml-11">
                 Stock
               </th>
               <th className=" border-gray-500 text-left sm:text-sm  sm:ml-7 md:ml-7">
                 Update
               </th>
-              <th className=" border-gray-500 text-left sm:text-sm  sm:ml-7 md:ml-7">
+              <th className=" border-gray-500 text-left sm:text-sm  sm:ml-7 md:ml-12">
                 Delete
               </th>
             </tr>
@@ -353,7 +370,7 @@ const Products = () => {
             {products.map((product, index) => {
               return (
                 <tr
-                  className="grid grid-cols-9 items-center gap-4 sm:gap-20 md:gap-20 w-full border-b my-3 py-3 h-[70px]"
+                  className="grid grid-cols-9 items-center gap-1 sm:gap-20 md:gap-20 w-full border-b my-3 py-3 h-[70px]"
                   key={product._id}
                 >
                   <td className=" border-gray-500 text-left">{index + 1}</td>
@@ -370,13 +387,13 @@ const Products = () => {
                   <td className=" border-gray-500 text-left">
                     {product.category}
                   </td>
-                  <td className=" border-gray-500 text-left md:ml-3">
+                  <td className=" border-gray-500 text-left  md:ml-3">
                     {product.price}
                   </td>
-                  <td className=" border-gray-500 text-left sm:w-[100px] md:w-[100px]">
-                    {product.description}
+                  <td className=" border-gray-500  sm:w-[100px] md:w-[100px] text-left">
+                    {product.description.slice(0, 30)} ...
                   </td>
-                  <td className=" border-gray-500 text-left sm:ml-7 md:ml-7">
+                  <td className=" border-gray-500 text-left lg:ml-11 sm:ml-7 md:ml-7">
                     {product.stock}
                   </td>
                   <td className=" border-gray-500 text-left sm:ml-7 md:ml-7">
@@ -387,7 +404,7 @@ const Products = () => {
                       Update
                     </button>
                   </td>
-                  <td className=" border-gray-500 text-left sm:ml-7 md:ml-7">
+                  <td className=" border-gray-500 text-left sm:ml-7 md:ml-12">
                     <button
                       className="sm:text-sm bg-red-400 py-2 px-4 rounded-lg"
                       onClick={() => handleDeleteproduct(product._id)}

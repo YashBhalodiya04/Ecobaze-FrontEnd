@@ -29,7 +29,7 @@ export const addToCart = createAsyncThunk(
   "addToCart",
   async (payload, { rejectWithValue, getState, dispatch }) => {
     const { productId, quantity, price } = payload;
-    // console.log(payload);
+    console.log(payload);
 
     try {
       const responce = await axios.post(

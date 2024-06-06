@@ -30,9 +30,9 @@ const ProductCard = (props) => {
 
   return (
     <>
-      <div className="flex flex-col justify-between h-full items-start gap-4 border border-white py-2 px-4 bg-white  hover:border-green-400 hover:shadow-lg cursor-pointer">
+      <div className="flex flex-col justify-between h-full items-start gap-2 border border-white py-2 px-4 bg-white  hover:border-green-400 hover:shadow-lg cursor-pointer">
         <div
-          className="flex justify-center items-center w-full overflow-hidden"
+          className="flex justify-center items-center w-full overflow-hidden object-fill"
           onClick={() => navigate(`/showproductdetail/${props.productId}`)}
         >
           <img

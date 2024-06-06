@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-1 items-start justify-start">
           <h1>Help</h1>
-          <p className="mt-4 text-sm opacity-60 hover:opacity-100">Contect</p>
+          <Link to="/contact" className="mt-4 text-sm opacity-60 hover:opacity-100">Contect</Link>
           <p className="text-sm opacity-60 hover:opacity-100">
             Term & Condition
           </p>
@@ -47,17 +47,16 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-1 items-start justify-start">
           <h1>Proxy</h1>
-          <p className="mt-4 text-sm opacity-60 hover:opacity-100">About</p>
-          <p className="text-sm opacity-60 hover:opacity-100">Shop</p>
-          <p className="text-sm opacity-60 hover:opacity-100">Product</p>
+          <Link to="/about" className="mt-4 text-sm opacity-60 hover:opacity-100">About</Link>
+          <Link to="/shop" className="text-sm opacity-60 hover:opacity-100">Shop</Link>
         </div>
         <div className="flex flex-col gap-1 items-start justify-start">
           <h1>Categories</h1>
-          <p className="mt-4 text-sm opacity-60 hover:opacity-100">
+          <Link to="/shop" className="mt-4 text-sm opacity-60 hover:opacity-100">
             Fruit & Vagitables
-          </p>
-          <p className="text-sm opacity-60 hover:opacity-100">Bread & Bakery</p>
-          <p className="text-sm opacity-60 hover:opacity-100">Snacks</p>
+          </Link>
+          <Link to="/shop" className="text-sm opacity-60 hover:opacity-100">Bread & Bakery</Link>
+          <Link to="/shop" className="text-sm opacity-60 hover:opacity-100">Snacks</Link>
         </div>
       </div>
       <div className="flex items-center justify-center gap-4 w-full text-4xl">

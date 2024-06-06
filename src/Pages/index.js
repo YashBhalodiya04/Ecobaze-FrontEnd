@@ -11,9 +11,11 @@ import Shop from "./Shop";
 import Contect from "./Contect";
 import About from "./About";
 import ShowProductDetail from "./ProductFullDetail/ShowProductDetail.jsx";
+import NotFonundPage from "./NotFonundPage.jsx";
 
 export {
   Cart,
+  NotFonundPage,
   AdminDashboard,
   Home,
   Login,

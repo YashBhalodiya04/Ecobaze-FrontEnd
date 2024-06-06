@@ -3,30 +3,26 @@ import { Outlet, Link, useLocation } from "react-router-dom";
 import { FCategory, FHome, FProduct, FReview } from "./assets";
 
 const NavLinks = [
-  {
-    label: "Dashboard",
-    path: "dashboard",
-    icon: FHome,
-    filePath: "/api/v1/admin/dashboard",
-  },
+  // {
+  //   label: "Dashboard",
+  //   path: "dashboard",
+  //   icon: FHome,
+  // },
   {
     label: "Category",
     path: "category",
     icon: FCategory,
-    filePath: "/api/v1/admin/category",
   },
   {
     label: "Products",
     path: "product",
     icon: FProduct,
-    filePath: "/api/v1/admin/product",
   },
-  {
-    label: "Reviews",
-    path: "review",
-    icon: FReview,
-    filePath: "/api/v1/admin/review",
-  },
+  // {
+  //   label: "Reviews",
+  //   path: "review",
+  //   icon: FReview,
+  // },
 ];
 
 const Admin = () => {
@@ -42,8 +38,8 @@ const Admin = () => {
   });
 
   return (
-    <div className="w-full flex h-[84vh] items-start justify-start gap-3 px-20 mt-6 sm:flex-col sm:justify-start sm:px-10 md:px-2 ">
-      <div className="w-[200px] md:w-[160px] h-full flex flex-col items-start justify-start gap-3  sm:grid sm:grid-cols-2  sm:gap-0 sm:w-full sm:border-none sm:h-16">
+    <div className="w-full flex h-[84vh] items-start justify-start gap-3 px-20 mt-6 sm:flex-col sm:justify-start sm:px-10  md:grid md:grid-cols-1  md:place-content-start md:place-items-center ">
+      <div className="w-[200px]  h-full flex flex-col items-start justify-start gap-3  sm:grid sm:grid-cols-2 md:grid md:grid-cols-2 md:place-content-between md:w-full  sm:gap-0 sm:w-full sm:border-none sm:h-16">
         {NavLinks.map((item, index) => {
           return (
             <Link
@@ -52,8 +48,8 @@ const Admin = () => {
               onClick={() => setActiveLink(index)}
               className={`${
                 index == activeLink
-                  ? "flex items-center justify-center gap-2 text-lg font-bold ml-1 transition-all"
-                  : "flex items-center justify-center gap-2 text-lg hover:font-bold hover:ml-1 transition-all"
+                  ? "flex items-center justify-center gap-2 text-lg font-bold  transition-all"
+                  : "flex items-center justify-center gap-2 text-lg hover:font-bold  transition-all"
               }`}
             >
               <img src={item.icon} alt="LOGO" className="w-7 select-none" />{" "}
